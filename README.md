@@ -2,8 +2,6 @@
     <img src="gallery/logo.png" width=500 />
 </div>
 
-## CriptoTracker App
-
 React Native App for (iOs and Android) managed by Expo that allow listing current crypto currencies in the market. This app consumes api from CoinGecko (https://www.coingecko.com/api/documentations/v3)
 
 ### `What is doing?`
@@ -28,6 +26,8 @@ expo start
 
 ### `To Do`
 - Splash Screen
+- Context Api
+- Redux
 
 ### `Know Bugs`
 
