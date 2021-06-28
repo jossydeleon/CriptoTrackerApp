@@ -1,11 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 import { View } from "react-native";
 import { StyleSheet } from "react-native";
 import { ListItem, Avatar } from "react-native-elements";
 import useUtil from "../hooks/util/useUtil";
 import { theme } from "../theme/theme";
 
-const CoinItem = ({ coin, onPress }) => {
+const CoinItem = memo(({ coin, onPress }) => {
 
   const { trimTwoDecimals, currencyDollarFormatter } = useUtil();
 
@@ -36,7 +36,7 @@ const CoinItem = ({ coin, onPress }) => {
       </ListItem.Content>
     </ListItem>
   );
-};
+});
 
 const styles = StyleSheet.create({
   containerItem: {

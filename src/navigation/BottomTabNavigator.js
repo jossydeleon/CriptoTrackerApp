@@ -5,11 +5,10 @@ import Home from "../screens/Home";
 import { Icon } from "react-native-elements";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { theme } from "../theme/theme";
-import { createStackNavigator } from "@react-navigation/stack";
+import { Screens } from ".";
 
 //Assign constan to BottomTabNavigator
 const BottomTab = createBottomTabNavigator();
-const StackChild = createStackNavigator();
 
 /**
  * Function to get name of current bottom tab
@@ -36,7 +35,7 @@ export default function BottomTabNavigator({ navigation, route }) {
    */
   useLayoutEffect(() => {
     const title = getCurrentScreeenName(route);
-    if (title === "Home") {
+    if (title === Screens.Home) {
       /*
       navigation.setOptions({
         headerTitle: <SearchHeader placeholder="Search" />,
@@ -54,7 +53,7 @@ export default function BottomTabNavigator({ navigation, route }) {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Home"
+      initialRouteName={Screens.Home}
       screenOptions={{
         gestureEnabled: true,
       }}
@@ -66,7 +65,7 @@ export default function BottomTabNavigator({ navigation, route }) {
     >
   
           <BottomTab.Screen
-            name="Home"
+            name={Screens.Home}
             component={Home}
             options={{
               tabBarIcon: ({ color, size }) => (
@@ -83,7 +82,7 @@ export default function BottomTabNavigator({ navigation, route }) {
 
   
           <BottomTab.Screen
-            name="Favorites"
+            name={Screens.Favorites}
             component={Favorites}
             options={{
               tabBarIcon: ({ color, size }) => (

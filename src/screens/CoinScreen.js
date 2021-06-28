@@ -10,15 +10,22 @@ import useUtil from "../hooks/util/useUtil";
 import { theme } from "../theme/theme";
 import _ from "underscore";
 import * as Device from 'expo-device';
+import { dispatchAddToFavorites } from '../redux/actions' 
+import { useDispatch, useSelector } from 'react-redux';
 
 const CoinScreen = ({ navigation, route }) => {
   
+  //Redux
+  const favorites = useSelector((state) => state.favorites);
+
   //hook util
   const { currencyDollarFormatter, getWeekAgoUnixTimestamp } = useUtil();
   //State to handle loading
   const [loading, setLoading] = useState(false);
   //State to handle current coin
   const [coin, setCoin] = useState();
+  //State to handle is coin is favorite
+  const [isFavorite, setIsFavorite] = useState(false);
   //State to handle chart data
   const [data, setData] = useState({
     xAxisData: [],
@@ -26,6 +33,9 @@ const CoinScreen = ({ navigation, route }) => {
     yAxisData: [],
     yAxisLabels: [],
   });
+
+  //Redux dispatcher
+  const dispatch = useDispatch();
 
   /**
    * Effect to receive coin by parameter
@@ -46,10 +56,20 @@ const CoinScreen = ({ navigation, route }) => {
       makeApiCall(coin.id);
     }
   }, [coin]);
+
+
+  /**
+   * Effect to compute is coin is in favorite list
+   */
+  useEffect(() => {
+    if(coin) {
+      setIsFavorite(favorites.some(item => item.id === coin.id))
+    }
+  }, [coin])
   
   
   /**
-   *
+   * Make a call to coingecko to get details for current coin selected
    * @param {*} id
    */
   const makeApiCall = async (id) => {
@@ -72,23 +92,32 @@ const CoinScreen = ({ navigation, route }) => {
     setData({ xAxisData: prices, xAxisLabels: week });
   };
 
+
+  /**
+   * 
+   */
+  const handleAddToFavorites = () => {
+    dispatch(dispatchAddToFavorites(coin))
+    setIsFavorite(true);
+  } 
+
   /**
    * Header(MainStackNavigation) interaction with screen component
    */
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleAddToFavorites}>
           <Icon
             name="heart"
             type="font-awesome-5"
-            color="gray"
+            color={isFavorite ? "red" : "gray"}
             style={styles.heartIcon}
           />
         </TouchableOpacity>
       ),
     });
-  }, [navigation]);
+  }, [navigation, coin, isFavorite]);
 
   
   if(!coin || loading) {
@@ -110,12 +139,12 @@ const CoinScreen = ({ navigation, route }) => {
       </Text>
 
       <View style={styles.chartContainer}>
-        <LineChartSvg
+        {Device.deviceName !== null && <LineChartSvg
           xAxisData={data.xAxisData}
           xAxisLabels={data.xAxisLabels}
           yAxisData={data.yAxisData}
           yAxisLabels={data.yAxisLabels}
-        />
+        />}
       </View>
 
       <View style={styles.containerDetails}>
@@ -136,7 +165,6 @@ const CoinScreen = ({ navigation, route }) => {
           <Text style={styles.subtitleDetail}>{currencyDollarFormatter(coin.fully_diluted_valuation)}</Text>
         </View>
       </View>
-
     </View>
   );
 };

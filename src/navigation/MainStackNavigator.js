@@ -4,6 +4,7 @@ import BottomTabNavigator from "./BottomTabNavigator";
 import CoinScreen from "../screens/CoinScreen";
 import { theme } from "../theme/theme";
 import HeaderLogo from "../components/HeaderLogo";
+import { Screens } from ".";
 
 const Stack = createStackNavigator();
 
@@ -24,7 +25,7 @@ export default function MainStackNavigator() {
       }}
     >
       <Stack.Screen
-        name="Home"
+        name={Screens.Home}
         component={BottomTabNavigator}
         options={{
           headerTitle: (props) => <HeaderLogo {...props} />,
@@ -32,7 +33,7 @@ export default function MainStackNavigator() {
       />
 
       <Stack.Screen
-        name="CoinScreen"
+        name={Screens.CoinDetails}
         component={CoinScreen}
         options={({ route }) => ({
           title: route.params.name,
