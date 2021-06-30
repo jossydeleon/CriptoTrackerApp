@@ -9,10 +9,11 @@ React Native App for (iOs and Android) managed by Expo that allow listing curren
 - Shows a Linear chart with variations of prices for last 7 days
 
 ### `What is using`
-- React Navigation 5
-- Stack Navigation
-- Bottom Navigation
-- Lottie animations
+- Expo SDK SDK 41.
+- React Navigation 5.
+- Redux to handle the state.
+- Redux-Thunk middleware to allow action creators use async logic.
+- Lottie animations.
 
 ### `Install Dependencies`
 ```
@@ -26,12 +27,16 @@ expo start
 
 ### `To Do`
 - Splash Screen
-- Context Api
-- Redux
 
 ### `Know Bugs`
 
 ### `Gallery`
 <p float="left">
-  
+  <img src="gallery/crypto_01.png" width=500 />
+  <img src="gallery/crypto_02.png" width=500 />
+  <img src="gallery/crypto_03.png" width=500 />
+  <img src="gallery/crypto_04.png" width=500 />
+  <img src="gallery/crypto_05.png" width=500 />
+  <img src="gallery/crypto_06.png" width=500 />
+  <img src="gallery/crypto_07.png" width=500 />
 </p>
