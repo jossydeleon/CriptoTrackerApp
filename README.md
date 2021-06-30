@@ -32,11 +32,10 @@ expo start
 
 ### `Gallery`
 <p float="left">
-  <img src="gallery/crypto_01.png" width=500 />
-  <img src="gallery/crypto_02.png" width=500 />
-  <img src="gallery/crypto_03.png" width=500 />
-  <img src="gallery/crypto_04.png" width=500 />
-  <img src="gallery/crypto_05.png" width=500 />
-  <img src="gallery/crypto_06.png" width=500 />
-  <img src="gallery/crypto_07.png" width=500 />
+  <img src="gallery/crypto_01.png" width=250 />
+  <img src="gallery/crypto_02.png" width=250 />
+  <img src="gallery/crypto_03.png" width=250 />
+  <img src="gallery/crypto_04.png" width=250 />
+  <img src="gallery/crypto_05.png" width=250 />
+  <img src="gallery/crypto_06.png" width=250 />
 </p>
