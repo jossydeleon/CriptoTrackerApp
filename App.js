@@ -5,14 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import MainStackNavigator from "./src/navigation/MainStackNavigator";
 import { theme } from "./src/theme/theme";
 import { StatusBar } from "expo-status-bar";
-import { createStore } from "redux";
-import allReducers from "./src/redux/reducers";
 import { Provider } from "react-redux";
-
-const store = createStore(
-  allReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+import store from "./src/redux/store";
 
 export default function App() {
   return (
@@ -30,5 +24,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:theme.colors.background
   },
 });

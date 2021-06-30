@@ -1,37 +1,44 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { StyleSheet, View } from "react-native";
-import axios from "axios";
 import CoinList from "../components/CoinList";
 import SearchHeader from "../components/SearchHeader";
 import { Screens } from "../navigation";
+import { useDispatch, useSelector } from "react-redux";
+import actionCreators from "../redux/actions";
 
 const Home = ({ navigation }) => {
-  const [coins, setCoins] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("");
+
+  //Redux
+  const dispatch = useDispatch();
+  const { fetchCryptoCoins } = actionCreators.coinsActions;
+  const {coins, loading, error} = useSelector(state => state.coins);
+
+
+   //State to handle typing on search bar
+   const [query, setQuery] = useState("");
 
   /**
    * Effect to call function when component load
    */
   useEffect(() => {
-    makeCallCoins();
+    handleRequestCoins();
   }, []);
 
-  /**
-   * Make request to coingecko to get all coins in market
-   */
-  const makeCallCoins = useCallback(async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=300&page=1&sparkline=false"
-      );
-      setCoins(response.data);
-    } catch (error) {
-    } finally {
-      setLoading(false);
+
+  useEffect(() => {
+    if(error) {
+      alert(error)
     }
-  }, [coins]);
+  }, [error])
+
+
+  /**
+   * Handle process of request coins
+   */
+  const handleRequestCoins = useCallback(() => {
+    dispatch(fetchCryptoCoins());
+  },[coins])
+
 
   /**
    *
@@ -66,7 +73,7 @@ const Home = ({ navigation }) => {
       <CoinList
         coins={filteredCoins}
         loading={loading}
-        onRefresh={makeCallCoins}
+        onRefresh={handleRequestCoins}
         onPress={handleSelectedCoin}
       />
     </View>

@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   header: {
-    fontFamily: "MeriendaOne-Regular",
-    //fontSize: wp("5%"),
+    //fontFamily: "MeriendaOne-Regular",
     color: theme.colors.white,
     textAlign: "center",
+    fontWeight:"bold"
   },
 });
 

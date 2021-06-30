@@ -1,15 +1,16 @@
 import React from "react";
-import { View, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import CoinFavoriteItem from "../components/CoinFavoriteItem";
 import IconMessage from "../components/IconMessage";
 import { useDispatch } from "react-redux";
-import { dispatchDeleteFromFavorites } from "../redux/actions";
+import actionCreators from "../redux/actions";
 import { Screens } from "../navigation";
 
 const Favorites = ({ navigation }) => {
   
   //Redux
+  const { addOrDeleteFromFavorite } = actionCreators.favoritesActions;
   const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
 
@@ -24,11 +25,11 @@ const Favorites = ({ navigation }) => {
   };
 
   /**
-   *
+   * Handle removing a coin from favorite list
    * @param {*} coin
    */
   const handleDeleteFavorite = (coin) => {
-    dispatch(dispatchDeleteFromFavorites(coin));
+    dispatch(addOrDeleteFromFavorite(coin));
   };
 
   return (
